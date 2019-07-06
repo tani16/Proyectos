@@ -1,4 +1,4 @@
-package dani.com.Applicacion;
+package com.dani.Applicacion;
 
 import org.hibernate.Session;
 
