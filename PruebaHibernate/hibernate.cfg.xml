@@ -12,6 +12,8 @@
      	<property name="hibernate.current_session_context_class">thread</property>
 
      	<mapping class="com.dani.entity.Pruebas"/>
+     	<mapping class="com.dani.entity.Equipos"/>
+     	<mapping class="com.dani.entity.Jornadas"/>
 
   	</session-factory>
 </hibernate-configuration>
