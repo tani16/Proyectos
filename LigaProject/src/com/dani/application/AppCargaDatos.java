@@ -120,7 +120,7 @@ class AppCargaDatos {
 			throw new IllegalArgumentException("Unexpected value: " + key);
 		}
 		
-		equipo = EquiposDao.getEquipoById(id);
+		//equipo = EquiposDao.getEquipoById(id);
 		
 		return equipo;
 	}
