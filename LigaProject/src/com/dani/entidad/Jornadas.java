@@ -35,6 +35,7 @@ public class Jornadas implements Serializable {
 		this.isJugado = isJugado;
 	}
 
+
 	public int getIdJornada() {
 		return idJornada;
 	}

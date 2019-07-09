@@ -4,20 +4,30 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dani.dao.EquiposDao;
+import com.dani.dao.JornadasDao;
+import com.dani.dao.PartidosDao;
+import com.dani.dao.ResultadosDao;
+import com.dani.daoimpl.EquiposDaoImpl;
+import com.dani.daoimpl.JornadasDaoImpl;
+import com.dani.daoimpl.PartidosDaoImpl;
+import com.dani.daoimpl.ResultadosDaoImpl;
 import com.dani.entidad.Equipos;
+import com.dani.entidad.Jornadas;
+import com.dani.entidad.Partidos;
+import com.dani.entidad.Resultados;
 import com.dani.util.FicherosUtils;
 
 class AppCargaDatos {
-	private static List<String> jornadasTXT = new ArrayList<String>();
+	private static List<String> jornadasTXT = new ArrayList<>();
+	private static int contadorJornadas = 0;
 	
 	private AppCargaDatos() {
 	    throw new IllegalStateException("Utility class");
 	}
 	
 	public static void execute() throws Exception {
-		String linea;
-		int contador = 0;
-		
+		String linea;		
 
 		BufferedReader lector = FicherosUtils.openFile();
 		
@@ -27,7 +37,7 @@ class AppCargaDatos {
 				jornadasTXT.add(linea);
 				linea = lector.readLine();
 			}
-			
+			contadorJornadas++;
 			obtienePartidos();
 			
 			
@@ -38,18 +48,34 @@ class AppCargaDatos {
 	}
 
 	private static void obtienePartidos() {
+		String[] infoFecha = new String[3];
+		ResultadosDao resultadosDao = new ResultadosDaoImpl();
+		JornadasDao jornadasDao = new JornadasDaoImpl();
+		PartidosDao partidosDao = new PartidosDaoImpl();
 		
-		String[] infoPartido = new String[3];
+		Resultados resultado = resultadosDao.getResultadoById(0);
+		infoFecha = jornadasTXT.get(2).split(";");
+		Jornadas jornada = new Jornadas(contadorJornadas, infoFecha[1], false);
 		
+		jornadasDao.createJornada(jornada);
+				
 		for(int i = 2; i < 12; i++) {
+			String[] infoPartido = new String[3];
 			infoPartido = jornadasTXT.get(i).split(";");
+
+			Equipos equipoC = devuelveEquipo(infoPartido[0]);
+			Equipos equipoF = devuelveEquipo(infoPartido[2]);
 			
-			Equipos equipoC = devuelveEquipo(infoPartido[1]);
+			Partidos partido = new Partidos(i-1, jornada, equipoC, equipoF, resultado);
+			partidosDao.create(partido);
+			
 		}
 		
 	}
 
 	private static Equipos devuelveEquipo(String key) {
+		
+		EquiposDao equiposDao = new EquiposDaoImpl();
 		
 		Equipos equipo = null;
 		int id = 0;
@@ -120,7 +146,7 @@ class AppCargaDatos {
 			throw new IllegalArgumentException("Unexpected value: " + key);
 		}
 		
-		//equipo = EquiposDao.getEquipoById(id);
+		equipo = equiposDao.getEquipoById(id);
 		
 		return equipo;
 	}

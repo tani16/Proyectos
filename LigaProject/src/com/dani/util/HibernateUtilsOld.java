@@ -5,7 +5,7 @@ import java.io.File;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-class HibernateUtil {
+class HibernateUtilsOld {
 	
 	private static final SessionFactory sessionFactory;
     static {
@@ -19,7 +19,7 @@ class HibernateUtil {
         }
     }
     
-    private HibernateUtil() {
+    private HibernateUtilsOld() {
         throw new IllegalStateException("Utility class");
       }
 
