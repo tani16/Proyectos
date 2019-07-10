@@ -16,7 +16,9 @@ public class PartidosDaoImpl implements PartidosDao {
 
 	@Override
 	public void create(Partidos partido) {
+		session = HibernateUtils.getTransaction();
 		session.save(partido);
+		HibernateUtils.doCommit(session);
 	}
 	
 

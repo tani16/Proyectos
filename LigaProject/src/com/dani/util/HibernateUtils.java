@@ -61,6 +61,17 @@ public class HibernateUtils {
 		}
 	}
 			
+	public static Session getTransaction() {
+		Session session = getSessionFactory().getCurrentSession();
+		if(!session.getTransaction().isActive()) {
+			session.beginTransaction();
+		}
+		return session;
+	}
 	
-		
+	public static void doCommit(Session session) {
+		session.getTransaction().commit();
+		session = getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+	}
 }

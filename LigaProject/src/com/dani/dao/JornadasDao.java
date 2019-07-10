@@ -6,5 +6,6 @@ public interface JornadasDao {
 
 	public void createJornada(Jornadas jornada);
 	
+	public Jornadas nextJornada();
 	
 }

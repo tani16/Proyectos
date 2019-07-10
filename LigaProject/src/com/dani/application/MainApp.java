@@ -8,10 +8,9 @@ public class MainApp {
 	
 	public static void main(String[] args) throws Exception {
 		
-		Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		AppCargaDatos.execute();
-		session.getTransaction().commit();
-		session.close();
+		Session session = HibernateUtils.getTransaction();
+		//AppCargaDatos.execute();
+		AppPlayJornada.execute();
+
 	}
 }
