@@ -9,7 +9,7 @@ class AppPlayJornada {
 	    throw new IllegalStateException("Utility class");
 	}
 	
-	public static void execute() throws Exception {
+	public static void execute() {
 		
 		Jornadas jornada = PlayMethods.buscarSiguienteJornada();
 	}

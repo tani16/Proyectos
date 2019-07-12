@@ -7,6 +7,10 @@ import com.dani.entidad.Jornadas;
 public class PlayMethods {
 	
 	private static JornadasDao jornadaDao = new JornadasDaoImpl();
+	
+	private PlayMethods() {
+		throw new IllegalStateException("Utility class");
+	}
 
 	public static Jornadas buscarSiguienteJornada() {
 				

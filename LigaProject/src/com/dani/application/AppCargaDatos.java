@@ -48,7 +48,7 @@ class AppCargaDatos {
 	}
 
 	private static void obtienePartidos() {
-		String[] infoFecha = new String[3];
+		String[] infoFecha;
 		ResultadosDao resultadosDao = new ResultadosDaoImpl();
 		JornadasDao jornadasDao = new JornadasDaoImpl();
 		PartidosDao partidosDao = new PartidosDaoImpl();
@@ -60,7 +60,7 @@ class AppCargaDatos {
 		jornadasDao.createJornada(jornada);
 				
 		for(int i = 2; i < 12; i++) {
-			String[] infoPartido = new String[3];
+			String[] infoPartido;
 			infoPartido = jornadasTXT.get(i).split(";");
 
 			Equipos equipoC = devuelveEquipo(infoPartido[0]);

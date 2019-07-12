@@ -6,7 +6,7 @@ import com.dani.util.HibernateUtils;
 
 public class MainApp {
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		
 		Session session = HibernateUtils.getTransaction();
 		//AppCargaDatos.execute();
