@@ -33,7 +33,7 @@ public class JornadasDaoImpl implements JornadasDao {
 				"      and j.idJornada = (Select min(j1.idJornada) " +
 				"							from Jornadas j1" +
 				"                          where j1.isJugado = :isJugado)";
-		Query<Jornadas> query = session.createQuery(sql);
+		Query<Jornadas> query = session.createQuery(sql, Jornadas.class);
 		query.setParameter("isJugado", false);
 
 		jornada = query.uniqueResult();

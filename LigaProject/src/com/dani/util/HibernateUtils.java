@@ -11,6 +11,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import com.dani.entidad.Clasificacion;
 import com.dani.entidad.Equipos;
+import com.dani.entidad.Estadisticas;
 import com.dani.entidad.Jornadas;
 import com.dani.entidad.Partidos;
 import com.dani.entidad.Resultados;
@@ -29,6 +30,7 @@ public class HibernateUtils {
 			configuration.addAnnotatedClass(Jornadas.class);
 			configuration.addAnnotatedClass(Partidos.class);
 			configuration.addAnnotatedClass(Resultados.class);
+			configuration.addAnnotatedClass(Estadisticas.class);
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		}

@@ -16,6 +16,6 @@
      	<mapping class="com.dani.entidad.Jornadas"/>
      	<mapping class="com.dani.entidad.Partidos"/>
      	<mapping class="com.dani.entidad.Resultados"/>
-
+		<mapping class="com.dani.entidad.Estadisticas"/>	
   	</session-factory>
 </hibernate-configuration>
