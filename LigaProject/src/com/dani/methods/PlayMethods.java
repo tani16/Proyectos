@@ -1,8 +1,5 @@
 package com.dani.methods;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.math3.random.RandomDataGenerator;
 
 import com.dani.dao.EstadisticasDao;

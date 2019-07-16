@@ -5,6 +5,9 @@ import com.dani.entidad.Jornadas;
 import com.dani.entidad.Partidos;
 import com.dani.entidad.Resultados;
 import com.dani.methods.PlayMethods;
+import com.dani.methods.TwitterMethods;
+
+import twitter4j.TwitterException;
 
 class AppPlayJornada {
 
@@ -12,7 +15,7 @@ class AppPlayJornada {
 	    throw new IllegalStateException("Utility class");
 	}
 	
-	public static void execute() {
+	public static void execute() throws TwitterException {
 		
 		Jornadas jornada = PlayMethods.searchNextJornada();
 		
@@ -33,6 +36,7 @@ class AppPlayJornada {
 		partido.setIdResultado(resultado);
 		
 		PlayMethods.logConsoleResultado(partido);
-		
+		String post = TwitterMethods.getPost(partido);
+		TwitterMethods.postResult(post);
 	}
 }

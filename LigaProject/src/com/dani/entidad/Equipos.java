@@ -25,6 +25,9 @@ public class Equipos implements Serializable{
 	
 	@Column(name = "abreviatura")
 	private String abreviatura;
+	
+	@Column(name = "twitter")
+	private String twitter;
 
 	public Equipos() {}
 	
@@ -57,6 +60,14 @@ public class Equipos implements Serializable{
 
 	public void setAbreviatura(String abreviatura) {
 		this.abreviatura = abreviatura;
+	}
+
+	public String getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
 	}
 
 }
