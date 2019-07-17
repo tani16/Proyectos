@@ -37,6 +37,6 @@ class AppPlayJornada {
 		
 		PlayMethods.logConsoleResultado(partido);
 		String post = TwitterMethods.getPost(partido);
-		TwitterMethods.postResult(post);
+		TwitterMethods.postResult(post); 
 	}
 }
