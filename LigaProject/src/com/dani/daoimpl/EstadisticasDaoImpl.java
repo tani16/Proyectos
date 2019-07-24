@@ -22,4 +22,35 @@ public class EstadisticasDaoImpl implements EstadisticasDao{
 		return session.get(Estadisticas.class, equipo.getIdEquipo());
 	}
 
+
+	@Override
+	public void updateRacha(Equipos equipo, String key) {
+		Estadisticas stats = getStatics(equipo);
+		if(key.equals("Victoria")) {
+			if(stats.getRacha() >= 0) {
+				stats.setRacha(stats.getRacha() + 0.1);
+			}else {
+				stats.setRacha(0.0);
+			}
+		}else if(key.equals("Empate")) {
+			stats.setRacha(0.0);
+		}else {
+			if(stats.getRacha() <= 0) {
+				stats.setRacha(stats.getRacha() - 0.1);
+			}else {
+				stats.setRacha(0.0);
+			}
+		}
+		save(stats);
+	}
+
+	@Override
+	public void save(Estadisticas stats) {
+
+		session = HibernateUtils.getTransaction();
+		session.save(stats);
+		HibernateUtils.doCommit(session);
+		
+	}
+
 }

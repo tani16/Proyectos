@@ -9,3 +9,4 @@ target/
 Users/
 /bin/
 \twitter4j.properties
+\secret.properties

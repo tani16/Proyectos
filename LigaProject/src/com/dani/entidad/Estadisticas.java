@@ -22,7 +22,7 @@ public class Estadisticas implements Serializable {
 	@Id
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idequipo")
-	private Equipos idEquipo;
+	private Equipos equipo;
 	
 	@Column(name = "gfcasa")
 	private double gfCasa;
@@ -50,11 +50,11 @@ public class Estadisticas implements Serializable {
 
 	public Estadisticas() {}
 	
-	public Estadisticas(Equipos idEquipo, double gfCasa, double gfFuera, double gcCasa, 
+	public Estadisticas(Equipos equipo, double gfCasa, double gfFuera, double gcCasa, 
 			double gcFuera, double racha, double presupuesto, 
 			double posicionAnterior, double valorMercado) {
 		super();
-		this.idEquipo = idEquipo;
+		this.equipo = equipo;
 		this.gfCasa = gfCasa;
 		this.gfFuera = gfFuera;
 		this.gcCasa = gcCasa;
@@ -65,12 +65,12 @@ public class Estadisticas implements Serializable {
 		this.valorMercado = valorMercado;
 	}
 
-	public Equipos getIdEquipo() {
-		return idEquipo;
+	public Equipos getEquipo() {
+		return equipo;
 	}
 
-	public void setIdEquipo(Equipos idEquipo) {
-		this.idEquipo = idEquipo;
+	public void setEquipo(Equipos equipo) {
+		this.equipo = equipo;
 	}
 
 	public double getGfCasa() {

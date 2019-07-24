@@ -8,6 +8,8 @@ public interface PartidosDao {
 	public void create(Partidos partido);
 
 	public Partidos nextPartido(Jornadas jornada);
+
+	public void updateResult(Partidos partido);
 	
 	
 }

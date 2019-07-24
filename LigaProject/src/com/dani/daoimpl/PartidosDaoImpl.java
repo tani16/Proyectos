@@ -40,6 +40,14 @@ public class PartidosDaoImpl implements PartidosDao {
 					
 		return partido;
 	}
+
+	@Override
+	public void updateResult(Partidos partido) {
+		session = HibernateUtils.getTransaction();
+		session.update(partido);
+		HibernateUtils.doCommit(session);
+		
+	}
 	
 
 

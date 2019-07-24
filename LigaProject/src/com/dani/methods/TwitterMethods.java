@@ -26,9 +26,9 @@ public class TwitterMethods {
 
 	public static String getPost(Partidos partido) {
 		
-		return "Jornada " + partido.getIdJornada().getIdJornada() + ENTER +
-			   partido.getEquipoC().getTwitter() + " " + partido.getIdResultado().getGolesC() + " - " +
-			   partido.getIdResultado().getGolesF() + " " + partido.getEquipoF().getTwitter();				
+		return "Jornada " + partido.getJornada().getIdJornada() + ENTER +
+			   partido.getEquipoC().getTwitter() + " " + partido.getResultado().getGolesC() + " - " +
+			   partido.getResultado().getGolesF() + " " + partido.getEquipoF().getTwitter();				
 		
 	}
 }
