@@ -1,5 +1,7 @@
 package com.dani.methods;
 
+import java.util.List;
+
 import org.apache.commons.math3.random.RandomDataGenerator;
 
 import com.dani.dao.ClasificacionDao;
@@ -25,7 +27,6 @@ public class PlayMethods {
 	private static PartidosDao partidosDao = new PartidosDaoImpl();
 	private static EstadisticasDao estadisticasDao = new EstadisticasDaoImpl();
 	private static ResultadosDao resultadoDao = new ResultadosDaoImpl();
-	private static ClasificacionDao clasificacionDao = new ClasificacionDaoImpl();
 	
 	private PlayMethods() {
 		throw new IllegalStateException("Utility class");
@@ -38,7 +39,8 @@ public class PlayMethods {
 
 	public static Partidos searchNextPartido(Jornadas jornada) {
 		
-		return partidosDao.nextPartido(jornada);
+		Resultados resultadoNulo = resultadoDao.getResultadoById(0);
+		return partidosDao.nextPartido(jornada, resultadoNulo);
 	}
 
 	public static Estadisticas getStatics(Equipos equipo) {
@@ -69,7 +71,7 @@ public class PlayMethods {
 		
 		double phiPrima = CTE * fuerzaAtaque * fuerzaDefensa;
 		
-		double phi = phiPrima - 0.3 + statics.getPosicionAnterior() + statics.getPresupuesto() 
+		double phi = phiPrima - 0.5 + statics.getPosicionAnterior() + statics.getPresupuesto() 
 					 + statics.getRacha() + statics.getValorMercado();
 		
 		return phi;
@@ -85,7 +87,7 @@ public class PlayMethods {
 	public static void logConsoleResultado(Partidos partido) {
 		
 		System.out.println(partido.getEquipoC().getNombre() + " " 
-				+ partido.getResultado().getGolesC() + " - " + partido.getResultado().getGolesF()
+				+ partido.getIdResultado().getGolesC() + " - " + partido.getIdResultado().getGolesF()
 				+ " " + partido.getEquipoF().getNombre());
 		
 	}
@@ -94,6 +96,7 @@ public class PlayMethods {
 		resultadoDao.save(resultado);		
 		partidosDao.updateResult(partido);
 		
+		ClasificacionDao clasificacionDao = new ClasificacionDaoImpl();
 		Clasificacion clasLocal = clasificacionDao.getClasificacionByEquipo(partido.getEquipoC());
 		Clasificacion clasVisitante = clasificacionDao.getClasificacionByEquipo(partido.getEquipoF());
 		
@@ -114,7 +117,7 @@ public class PlayMethods {
 			estadisticasDao.updateRacha(partido.getEquipoC(), "Derrota");
 			estadisticasDao.updateRacha(partido.getEquipoF(), "Victora");
 		}else {
-			clasLocal.setPuntos(clasLocal.getPuntos() + 3);
+			clasLocal.setPuntos(clasLocal.getPuntos() + 1);
 			clasVisitante.setPuntos(clasVisitante.getPuntos() + 1);
 			estadisticasDao.updateRacha(partido.getEquipoC(), "Empate");
 			estadisticasDao.updateRacha(partido.getEquipoF(), "Empate");
@@ -124,5 +127,17 @@ public class PlayMethods {
 		clasificacionDao.save(clasVisitante);
 		
 	}
+
+	public static void saveJornadaPlayed(Jornadas jornada) {
+		jornada.setJugado(true);
+		jornadasDao.save(jornada);
+		
+	}
+
+	public static List<Clasificacion> getClasificacion() {
+		ClasificacionDao clasificacionDao = new ClasificacionDaoImpl();
+		return clasificacionDao.getList();
+	}
+
 
 }

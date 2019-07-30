@@ -24,9 +24,9 @@ public class ResultadosDaoImpl implements ResultadosDao {
 
 	@Override
 	public void save(Resultados resultado) {
-		session = HibernateUtils.getTransaction();
+	//	session = HibernateUtils.getTransaction();
 		session.save(resultado);
-		HibernateUtils.doCommit(session);
+	//	HibernateUtils.doCommit(session);
 		
 	}
 

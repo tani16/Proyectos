@@ -12,7 +12,7 @@ import com.squareup.okhttp.Response;
 
 public class BufferMethods {
 
-	private static final String URL_POST = "https://api.bufferapp.com/1/info/configuration.json";
+	private static final String URL_POST = "https://api.bufferapp.com/1/updates/create.json";
 	private static OkHttpClient client = new OkHttpClient();
 	
 	private BufferMethods() {

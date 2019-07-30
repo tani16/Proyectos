@@ -28,7 +28,7 @@ public class Partidos implements Serializable{
 	@Id
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idJornada")
-	private Jornadas jornada;
+	private Jornadas idJornada;
 	
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -41,17 +41,17 @@ public class Partidos implements Serializable{
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idResultado")
-	private Resultados resultado;
+	private Resultados idResultado;
 	
 	public Partidos() {}
 	
 	public Partidos(int idPartido, Jornadas jornada, Equipos equipoC, Equipos equipoF, Resultados resultado) {
 		super();
 		this.idPartido = idPartido;
-		this.jornada = jornada;
+		this.idJornada = jornada;
 		this.equipoC = equipoC;
 		this.equipoF = equipoF;
-		this.resultado = resultado;
+		this.idResultado = resultado;
 	}
 
 	public int getIdPartido() {
@@ -62,12 +62,12 @@ public class Partidos implements Serializable{
 		this.idPartido = idPartido;
 	}
 
-	public Jornadas getJornada() {
-		return jornada;
+	public Jornadas getIdJornada() {
+		return idJornada;
 	}
 
-	public void setJornada(Jornadas jornada) {
-		this.jornada = jornada;
+	public void setIdJornada(Jornadas jornada) {
+		this.idJornada = jornada;
 	}
 
 	public Equipos getEquipoC() {
@@ -86,11 +86,11 @@ public class Partidos implements Serializable{
 		this.equipoF = equipoF;
 	}
 
-	public Resultados getResultado() {
-		return resultado;
+	public Resultados getIdResultado() {
+		return idResultado;
 	}
 
-	public void setResultado(Resultados resultado) {
-		this.resultado = resultado;
+	public void setIdResultado(Resultados resultado) {
+		this.idResultado = resultado;
 	}
 }

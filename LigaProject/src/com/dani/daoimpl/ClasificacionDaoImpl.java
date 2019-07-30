@@ -26,9 +26,9 @@ public class ClasificacionDaoImpl implements ClasificacionDao {
 
 	@Override
 	public void save(Clasificacion clasificacion) {
-		session = HibernateUtils.getTransaction();
+	//	session = HibernateUtils.getTransaction();
 		session.save(clasificacion);
-		HibernateUtils.doCommit(session);		
+	//	HibernateUtils.doCommit(session);		
 	}
 	
 	public List<Clasificacion> getList(){

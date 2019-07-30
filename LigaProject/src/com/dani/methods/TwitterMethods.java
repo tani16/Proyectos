@@ -19,16 +19,16 @@ public class TwitterMethods {
 		
 		Twitter twitter = new TwitterFactory().getInstance();
 		
-		twitter.updateStatus("Pruebas - " + post);
+		twitter.updateStatus("Prueba - " + post);
 		
 	}
 
 
 	public static String getPost(Partidos partido) {
 		
-		return "Jornada " + partido.getJornada().getIdJornada() + ENTER +
-			   partido.getEquipoC().getTwitter() + " " + partido.getResultado().getGolesC() + " - " +
-			   partido.getResultado().getGolesF() + " " + partido.getEquipoF().getTwitter();				
+		return "Beta - Jornada " + partido.getIdJornada().getIdJornada() + ENTER +
+			   partido.getEquipoC().getTwitter() + " " + partido.getIdResultado().getGolesC() + " - " +
+			   partido.getIdResultado().getGolesF() + " " + partido.getEquipoF().getTwitter();				
 		
 	}
 }

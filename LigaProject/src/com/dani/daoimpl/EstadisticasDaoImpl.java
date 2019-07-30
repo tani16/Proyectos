@@ -47,9 +47,9 @@ public class EstadisticasDaoImpl implements EstadisticasDao{
 	@Override
 	public void save(Estadisticas stats) {
 
-		session = HibernateUtils.getTransaction();
+	//	session = HibernateUtils.getTransaction();
 		session.save(stats);
-		HibernateUtils.doCommit(session);
+	//	HibernateUtils.doCommit(session);
 		
 	}
 

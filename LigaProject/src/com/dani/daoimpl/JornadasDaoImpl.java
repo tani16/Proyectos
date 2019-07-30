@@ -17,9 +17,9 @@ public class JornadasDaoImpl implements JornadasDao {
 
 	@Override
 	public void createJornada(Jornadas jornada) {
-		session = HibernateUtils.getTransaction();
+	//	session = HibernateUtils.getTransaction();
 		session.save(jornada);
-		HibernateUtils.doCommit(session);
+	//	HibernateUtils.doCommit(session);
 	}
 
 	@Override
@@ -39,5 +39,10 @@ public class JornadasDaoImpl implements JornadasDao {
 		jornada = query.uniqueResult();
 		
 		return jornada;
+	}
+
+	@Override
+	public void save(Jornadas jornada) {		
+		session.save(jornada);
 	}
 }

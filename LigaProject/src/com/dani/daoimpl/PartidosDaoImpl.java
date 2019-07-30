@@ -6,6 +6,7 @@ import org.hibernate.query.Query;
 import com.dani.dao.PartidosDao;
 import com.dani.entidad.Jornadas;
 import com.dani.entidad.Partidos;
+import com.dani.entidad.Resultados;
 import com.dani.util.HibernateUtils;
 
 public class PartidosDaoImpl implements PartidosDao {
@@ -18,13 +19,13 @@ public class PartidosDaoImpl implements PartidosDao {
 
 	@Override
 	public void create(Partidos partido) {
-		session = HibernateUtils.getTransaction();
+	//	session = HibernateUtils.getTransaction();
 		session.save(partido);
-		HibernateUtils.doCommit(session);
+	//	HibernateUtils.doCommit(session);
 	}
 
 	@Override
-	public Partidos nextPartido(Jornadas jornada) {
+	public Partidos nextPartido(Jornadas jornada, Resultados resultadoNulo) {
 		Partidos partido = null;
 		
 		String sql = "select p"
@@ -32,9 +33,11 @@ public class PartidosDaoImpl implements PartidosDao {
 			 	+ "	   where p.idJornada = :idJornada"
 			 	+ "      and p.idPartido = (select min(p1.idPartido)"
 			 	+ " 						  from Partidos p1"
-			 	+ "							 where p1.idJornada = :idJornada)";
+			 	+ "							 where p1.idJornada = :idJornada"
+			 	+ "							   and p1.idResultado = :idResultado)";
 		Query<Partidos> query = session.createQuery(sql, Partidos.class);
 		query.setParameter("idJornada", jornada);
+		query.setParameter("idResultado", resultadoNulo);
 		
 		partido = query.uniqueResult();
 					
@@ -43,9 +46,9 @@ public class PartidosDaoImpl implements PartidosDao {
 
 	@Override
 	public void updateResult(Partidos partido) {
-		session = HibernateUtils.getTransaction();
+	//	session = HibernateUtils.getTransaction();
 		session.update(partido);
-		HibernateUtils.doCommit(session);
+	//	HibernateUtils.doCommit(session);
 		
 	}
 	
