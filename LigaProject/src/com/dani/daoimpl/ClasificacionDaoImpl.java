@@ -36,7 +36,8 @@ public class ClasificacionDaoImpl implements ClasificacionDao {
 		
 		String sql = "select c"
 				+ " 	from Clasificacion c "
-			 	+ "	   order by puntos desc, diferencia desc";
+			 	+ "	   order by puntos desc, diferencia desc, "
+			 	+ "				marcados desc, recibidos asc";
 		
 		Query<Clasificacion> query = session.createQuery(sql, Clasificacion.class);
 		

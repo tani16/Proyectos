@@ -28,7 +28,7 @@ public class EstadisticasDaoImpl implements EstadisticasDao{
 		Estadisticas stats = getStatics(equipo);
 		if(key.equals("Victoria")) {
 			if(stats.getRacha() >= 0) {
-				stats.setRacha(stats.getRacha() + 0.1);
+				stats.setRacha(stats.getRacha() + 0.05);
 			}else {
 				stats.setRacha(0.0);
 			}
@@ -36,7 +36,7 @@ public class EstadisticasDaoImpl implements EstadisticasDao{
 			stats.setRacha(0.0);
 		}else {
 			if(stats.getRacha() <= 0) {
-				stats.setRacha(stats.getRacha() - 0.1);
+				stats.setRacha(stats.getRacha() - 0.05);
 			}else {
 				stats.setRacha(0.0);
 			}

@@ -59,8 +59,8 @@ class AppPlayJornada {
 		partido.setIdResultado(resultado);
 		PlayMethods.updateData(partido, resultado);
 		
-		PlayMethods.logConsoleResultado(partido);
 		String post = TwitterMethods.getPost(partido);
+		PlayMethods.logConsoleResultado(post);
 
 		try {
 			BufferMethods.postOnBuffer(post);

@@ -26,9 +26,17 @@ public class TwitterMethods {
 
 	public static String getPost(Partidos partido) {
 		
-		return "Beta - Jornada " + partido.getIdJornada().getIdJornada() + ENTER +
-			   partido.getEquipoC().getTwitter() + " " + partido.getIdResultado().getGolesC() + " - " +
-			   partido.getIdResultado().getGolesF() + " " + partido.getEquipoF().getTwitter();				
+		StringBuilder post = new StringBuilder("Beta - Jornada ");
+		post.append(partido.getIdJornada().getIdJornada());
+		post.append(" " + ENTER);
+		post.append(partido.getEquipoC().getTwitter() + " " + partido.getIdResultado().getGolesC());
+		post.append(" - ");
+		post.append(partido.getIdResultado().getGolesF() + " " + partido.getEquipoF().getTwitter());
+		
+		return post.toString();
+//		return "Beta - Jornada " + partido.getIdJornada().getIdJornada() + ENTER +
+//			   partido.getEquipoC().getTwitter() + " " + partido.getIdResultado().getGolesC() + " - " +
+//			   partido.getIdResultado().getGolesF() + " " + partido.getEquipoF().getTwitter();				
 		
 	}
 }

@@ -57,8 +57,12 @@ public class PlayMethods {
 		
 		double phiPrima = CTE * fuerzaAtaque * fuerzaDefensa;
 		
-		double phi = phiPrima - 0.3 + statics.getPosicionAnterior() + statics.getPresupuesto() 
+		double phi = phiPrima - 0.4 + statics.getPosicionAnterior() + statics.getPresupuesto() 
 					 + statics.getRacha() + statics.getValorMercado();
+		
+		if (phi < 0) {
+			phi = 0;
+		}
 		
 		return phi;
 	}
@@ -71,8 +75,12 @@ public class PlayMethods {
 		
 		double phiPrima = CTE * fuerzaAtaque * fuerzaDefensa;
 		
-		double phi = phiPrima - 0.5 + statics.getPosicionAnterior() + statics.getPresupuesto() 
+		double phi = phiPrima - 0.4 + statics.getPosicionAnterior() + statics.getPresupuesto() 
 					 + statics.getRacha() + statics.getValorMercado();
+		
+		if (phi < 0) {
+			phi = 0;
+		}
 		
 		return phi;
 	}
@@ -84,11 +92,9 @@ public class PlayMethods {
 		return (int) rd.nextPoisson(phiC);
 	}
 
-	public static void logConsoleResultado(Partidos partido) {
+	public static void logConsoleResultado(String post) {
 		
-		System.out.println(partido.getEquipoC().getNombre() + " " 
-				+ partido.getIdResultado().getGolesC() + " - " + partido.getIdResultado().getGolesF()
-				+ " " + partido.getEquipoF().getNombre());
+		System.out.println(post);
 		
 	}
 
