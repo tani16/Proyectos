@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import com.dani.dao.PartidosDao;
+import com.dani.entidad.Equipos;
 import com.dani.entidad.Jornadas;
 import com.dani.entidad.Partidos;
 import com.dani.entidad.Resultados;
@@ -51,6 +52,62 @@ public class PartidosDaoImpl implements PartidosDao {
 	//	HibernateUtils.doCommit(session);
 		
 	}
+
+	@Override
+	public Partidos getPartidoByEquipos(Equipos equipoC, Equipos equipoF) {
+		Partidos partido = null;
+		
+		String sql = "select p"
+				+ " 	from Partidos p "
+			 	+ "	   where p.equipoC = :equipoC"
+			 	+ "      and p.equipoF = :equipoF";
+		
+		Query<Partidos> query = session.createQuery(sql, Partidos.class);
+		query.setParameter("equipoC", equipoC);
+		query.setParameter("equipoF", equipoF);
+		
+		partido = query.uniqueResult();
+					
+		return partido;
+	}
+
+	@Override
+	public Long getPartidosCasa(Equipos equipo, Jornadas jornada) {
+		
+		Long partidos = 0L;
+		
+		String sql = "select count(p.idJornada)"
+				+ " 	from Partidos p "
+			 	+ "	   where p.equipoC = :equipoC"
+				+ "      and p.idJornada < :jornada";
+		
+		Query<Long> query = session.createQuery(sql, Long.class);
+		query.setParameter("equipoC", equipo);
+		query.setParameter("jornada", jornada);
+		
+		partidos = query.uniqueResult();
+					
+		return partidos;
+	}
+	
+	public Long getPartidosFuera(Equipos equipo, Jornadas jornada) {
+		
+		Long partidos = 0L;
+		
+		String sql = "select count(p.idJornada)"
+				+ " 	from Partidos p "
+			 	+ "	   where p.equipoF = :equipoF"
+				+ "      and p.idJornada < :jornada";
+		
+		Query<Long> query = session.createQuery(sql, Long.class);
+		query.setParameter("equipoF", equipo);
+		query.setParameter("jornada", jornada);
+		
+		partidos = query.uniqueResult();
+					
+		return partidos;
+	}
+
 	
 
 

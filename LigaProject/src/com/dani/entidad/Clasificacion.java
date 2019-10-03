@@ -35,6 +35,10 @@ public class Clasificacion implements Serializable{
 	
 	@Column(name = "diferencia")
 	private int diferencia;
+	
+	@Column(name = "puntosreal")
+	private int puntosReal;
+	
 
 	public Clasificacion() {}
 	
@@ -84,6 +88,14 @@ public class Clasificacion implements Serializable{
 
 	public void setDiferencia(int diferencia) {
 		this.diferencia = diferencia;
+	}
+
+	public int getPuntosReal() {
+		return puntosReal;
+	}
+
+	public void setPuntosReal(int puntosReal) {
+		this.puntosReal = puntosReal;
 	}
 
 	

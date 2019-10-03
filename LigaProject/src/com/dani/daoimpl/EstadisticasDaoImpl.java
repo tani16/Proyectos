@@ -1,6 +1,7 @@
 package com.dani.daoimpl;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import com.dani.dao.EstadisticasDao;
 import com.dani.entidad.Equipos;
@@ -51,6 +52,35 @@ public class EstadisticasDaoImpl implements EstadisticasDao{
 		session.save(stats);
 	//	HibernateUtils.doCommit(session);
 		
+	}
+
+
+	@Override
+	public double getPresupuestoMedio() {
+		Double presupuestoMedio = 0.0;
+		
+		String sql = "select sum(e.presupuesto)"
+				+ " 	from Estadisticas e";
+
+		Query<Double> query = session.createQuery(sql, Double.class);
+		
+		presupuestoMedio = query.uniqueResult()/20;
+					
+		return presupuestoMedio;
+	}
+	
+	@Override
+	public double getValorMercadoMedio() {
+		Double VMMedio = 0.0;
+		
+		String sql = "select sum(e.valorMercado)"
+				+ " 	from Estadisticas e";
+
+		Query<Double> query = session.createQuery(sql, Double.class);
+		
+		VMMedio = query.uniqueResult()/20;
+					
+		return VMMedio;
 	}
 
 }

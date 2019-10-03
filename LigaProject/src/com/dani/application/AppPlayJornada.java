@@ -41,6 +41,7 @@ class AppPlayJornada {
 		List<Clasificacion> clasificacion = PlayMethods.getClasificacion();
 		ImageMethods.buildClasificacion(clasificacion);
 		HibernateUtils.doCommit(session);
+		
 	}
 
 	private static void playMatch(Jornadas jornada) {
@@ -49,8 +50,8 @@ class AppPlayJornada {
 		Estadisticas estadisticasC = PlayMethods.getStatics(partido.getEquipoC());				
 		Estadisticas estadisticasF = PlayMethods.getStatics(partido.getEquipoF());
 		
-		double phiC = PlayMethods.analizeStaticsCasa(estadisticasC, estadisticasF.getGcFuera());
-		double phiF = PlayMethods.analizeStaticsFuera(estadisticasF, estadisticasC.getGcCasa());
+		double phiC = PlayMethods.analizeStaticsCasa(estadisticasC, estadisticasF, jornada);
+		double phiF = PlayMethods.analizeStaticsFuera(estadisticasF, estadisticasC, jornada);
 		
 		Resultados resultado = new Resultados();
 		resultado.setGolesC(PlayMethods.calculateGoals(phiC));

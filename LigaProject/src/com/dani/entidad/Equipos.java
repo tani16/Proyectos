@@ -28,6 +28,9 @@ public class Equipos implements Serializable{
 	
 	@Column(name = "twitter")
 	private String twitter;
+	
+	@Column(name = "nameas")
+	private String nameAs;
 
 	public Equipos() {}
 	
@@ -68,6 +71,14 @@ public class Equipos implements Serializable{
 
 	public void setTwitter(String twitter) {
 		this.twitter = twitter;
+	}
+
+	public String getNameAs() {
+		return nameAs;
+	}
+
+	public void setNameAs(String nameAs) {
+		this.nameAs = nameAs;
 	}
 
 }

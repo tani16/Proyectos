@@ -48,39 +48,57 @@ public class PlayMethods {
 		return estadisticasDao.getStatics(equipo);
 	}
 
-	public static double analizeStaticsCasa(Estadisticas statics, double golesCFuera) {
+	public static double analizeStaticsCasa(Estadisticas staticsC, Estadisticas staticsF, Jornadas jornada) {
 		
-		final double CTE = (double)552/380;
+		Long golesTotalesCasa = resultadoDao.getGolesFavorCasa();
+		Long partidosTotales = (jornada.getIdJornada() - 1) * 10L;
 		
-		double fuerzaAtaque = statics.getGfCasa() / CTE;
-		double fuerzaDefensa = golesCFuera / CTE;
+		final double CTE = (double)golesTotalesCasa/partidosTotales;
 		
-		double phiPrima = CTE * fuerzaAtaque * fuerzaDefensa;
+		Long partidosCasa = partidosDao.getPartidosCasa(staticsC.getEquipo(), jornada);		
+		Long golesFavorCasa = resultadoDao.getGolesFavorCasa(staticsC.getEquipo());		
+		double fuerzaAtaque = ((double)golesFavorCasa / partidosCasa) / CTE;
 		
-		double phi = phiPrima - 0.4 + statics.getPosicionAnterior() + statics.getPresupuesto() 
-					 + statics.getRacha() + statics.getValorMercado();
+		Long golesContraFuera = resultadoDao.getGolesContraFuera(staticsF.getEquipo()); 
+		Long partidosFuera = partidosDao.getPartidosFuera(staticsF.getEquipo(), jornada);
+		double fuerzaDefensa = ((double)golesContraFuera / partidosFuera) / CTE;
 		
-		if (phi < 0) {
-			phi = 0;
-		}
+		double phiEquipo = CTE * fuerzaAtaque * fuerzaDefensa;
+		double phiPresupuesto = staticsC.getPresupuesto() / estadisticasDao.getPresupuestoMedio();
+		phiPresupuesto = (phiPresupuesto > 2) ? 0.2 : phiPresupuesto * 0.1;
+		double phiValorMercado = staticsC.getValorMercado() / estadisticasDao.getValorMercadoMedio();
+		phiValorMercado = (phiValorMercado > 2) ? 0.2 : phiValorMercado *0.1;
+		
+		double phi = 0.70 * phiEquipo  +  phiPresupuesto + phiValorMercado;
+		
+		phi = (phi < 0) ? 0 : phi;
 		
 		return phi;
 	}
 
-	public static double analizeStaticsFuera(Estadisticas statics, double golesCCasa) {
-		final double CTE = (double)431/380;
+	public static double analizeStaticsFuera(Estadisticas staticsF, Estadisticas staticsC, Jornadas jornada) {
+		Long golesTotalesFuera = resultadoDao.getGolesFavorFuera();
+		Long partidosTotales = (jornada.getIdJornada() - 1) * 10L;
 		
-		double fuerzaAtaque = statics.getGfFuera() / CTE;
-		double fuerzaDefensa = golesCCasa / CTE;
+		final double CTE = (double)golesTotalesFuera/partidosTotales;
 		
-		double phiPrima = CTE * fuerzaAtaque * fuerzaDefensa;
+		Long partidosFuera = partidosDao.getPartidosFuera(staticsF.getEquipo(), jornada);		
+		Long golesFavorFuera = resultadoDao.getGolesFavorFuera(staticsF.getEquipo());		
+		double fuerzaAtaque = ((double)golesFavorFuera / partidosFuera) / CTE;
+				
+		Long golesContraCasa = resultadoDao.getGolesContraCasa(staticsC.getEquipo()); 
+		Long partidosCasa = partidosDao.getPartidosCasa(staticsC.getEquipo(), jornada);
+		double fuerzaDefensa = ((double)golesContraCasa / partidosCasa) / CTE;
 		
-		double phi = phiPrima - 0.4 + statics.getPosicionAnterior() + statics.getPresupuesto() 
-					 + statics.getRacha() + statics.getValorMercado();
+		double phiEquipo = CTE * fuerzaAtaque * fuerzaDefensa;
+		double phiPresupuesto = staticsF.getPresupuesto() / estadisticasDao.getPresupuestoMedio();
+		phiPresupuesto = (phiPresupuesto > 2) ? 0.2 : phiPresupuesto * 0.1;
+		double phiValorMercado = staticsF.getValorMercado() / estadisticasDao.getValorMercadoMedio();
+		phiValorMercado = (phiValorMercado > 2) ? 0.2 : phiValorMercado * 0.1;
 		
-		if (phi < 0) {
-			phi = 0;
-		}
+		double phi = 0.70 * phiEquipo  +  phiPresupuesto + phiValorMercado;
+		
+		phi = (phi < 0) ? 0 : phi;
 		
 		return phi;
 	}

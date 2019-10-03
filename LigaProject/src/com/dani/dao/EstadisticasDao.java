@@ -10,4 +10,8 @@ public interface EstadisticasDao {
 	public void updateRacha(Equipos equipo, String key);
 	
 	public void save(Estadisticas stats);
+
+	public double getPresupuestoMedio();
+
+	public double getValorMercadoMedio();
 }

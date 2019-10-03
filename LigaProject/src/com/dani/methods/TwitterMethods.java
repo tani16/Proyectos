@@ -26,12 +26,17 @@ public class TwitterMethods {
 
 	public static String getPost(Partidos partido) {
 		
-		StringBuilder post = new StringBuilder("Beta - Jornada ");
+		StringBuilder post = new StringBuilder("Jornada ");
 		post.append(partido.getIdJornada().getIdJornada());
 		post.append(" " + ENTER);
 		post.append(partido.getEquipoC().getTwitter() + " " + partido.getIdResultado().getGolesC());
 		post.append(" - ");
 		post.append(partido.getIdResultado().getGolesF() + " " + partido.getEquipoF().getTwitter());
+		post.append(" " + ENTER);
+		post.append("#" + partido.getEquipoC().getAbreviatura() + " #" + partido.getEquipoF().getAbreviatura() + ENTER);
+		post.append("#LaLiga #LaLigaSantander #LFP #LigaBot " + ENTER );
+		post.append("#RealMadrid #RealSociedad #Atleti #Athletic " + ENTER );
+
 		
 		return post.toString();
 //		return "Beta - Jornada " + partido.getIdJornada().getIdJornada() + ENTER +

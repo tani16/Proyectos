@@ -12,6 +12,8 @@ public interface ClasificacionDao {
 	public void save(Clasificacion clasificacion);
 	
 	public List<Clasificacion> getList();
+
+	public void update(Clasificacion clasificacion);
 	
 	
 }

@@ -45,6 +45,12 @@ public class ClasificacionDaoImpl implements ClasificacionDao {
 					
 		return clasificacion;
 	}
+
+	@Override
+	public void update(Clasificacion clasificacion) {
+		session.update(clasificacion);
+		
+	}
 	
 
 }

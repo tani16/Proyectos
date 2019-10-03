@@ -28,6 +28,12 @@ public class Resultados implements Serializable{
 	
 	@Column(name = "golesF")
 	private int golesF;
+	
+	@Column(name = "golescreal")
+	private int golesCReal;
+	
+	@Column(name = "golesfreal")
+	private int golesFReal;
 
 	public Resultados() {}
 	
@@ -60,6 +66,22 @@ public class Resultados implements Serializable{
 
 	public void setGolesF(int golesF) {
 		this.golesF = golesF;
+	}
+
+	public int getGolesCReal() {
+		return golesCReal;
+	}
+
+	public void setGolesCReal(int golesCReal) {
+		this.golesCReal = golesCReal;
+	}
+
+	public int getGolesFReal() {
+		return golesFReal;
+	}
+
+	public void setGolesFReal(int golesFReal) {
+		this.golesFReal = golesFReal;
 	}
 	
 	
